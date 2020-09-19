@@ -3,9 +3,12 @@ package se.lexicon.romeobot.model;
 import se.lexicon.romeobot.Sequenzers.PersonSequencer;
 
 public class Person {
-    private final int personId;
+    private int personId;
     private String firstName;
     private String lastName;
+
+    public Person() {
+    }
 
     public Person(String firstName, String lastName) { // Constructor
         this.personId = PersonSequencer.nextPersonId();
@@ -31,5 +34,14 @@ public class Person {
 
     public void setLastName(String lastName) { // We need to set the name
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "personId=" + personId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }
