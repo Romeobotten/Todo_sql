@@ -1,7 +1,5 @@
 package se.lexicon.romeobot.model;
 
-import se.lexicon.romeobot.Sequenzers.PersonSequencer;
-
 public class Person {
     private int personId;
     private String firstName;
@@ -10,8 +8,8 @@ public class Person {
     public Person() {
     }
 
-    public Person(String firstName, String lastName) { // Constructor
-        this.personId = PersonSequencer.nextPersonId();
+    public Person(int personId, String firstName, String lastName) { // Constructor
+        this.personId = personId; // PersonSequencer.nextPersonId();
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -19,6 +17,9 @@ public class Person {
     public int getPersonId() { // We need to read personId
         return this.personId;
     }                          // We have no setPersonId because it is set only once and final
+    public void setPersonId(int personId) { // We can set the personId
+        this.personId = personId;
+    }
 
     public String getFirstName() { // We need to read the name
         return this.firstName;

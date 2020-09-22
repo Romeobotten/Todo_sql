@@ -1,25 +1,42 @@
 package se.lexicon.romeobot.model;
 
-import se.lexicon.romeobot.Sequenzers.TodoSequencer;
+import java.time.LocalDate;
 
 public class Todo {
-    private final int todoId;
-//    private String title;
+    private int todoId;
+    private String title;
     private String description;
-//    private LocalDate deadline;
+    private LocalDate deadline;
     private boolean done;
     private Person assignee;
 
-    public Todo(String description) { // Constructor
-        this.todoId = TodoSequencer.nextTodoId();
+    public Todo() {
+    }
+
+    public Todo(int todoId, String title, String description, LocalDate deadline, boolean done, Person assignee) { // Constructor
+        this.todoId = todoId; //TodoSequencer.nextTodoId();
+        this.title = title;
         this.description = description;
-        this.done = false;
-        this.assignee = null;
+        this.deadline = deadline;
+        this.done = done;
+        this.assignee = assignee;
     }
 
     public int getTodoId() { // We need the ID number of the task
         return todoId;
     }                        // We have no setTodoId because it is set only once and final
+
+    public void setTodoId(int todoId) {
+        this.todoId = todoId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getDescription() { // We need to read the description
         return description;
@@ -27,6 +44,14 @@ public class Todo {
 
     public void setDescription(String description) { // We might need to change the description
         this.description = description;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
     public boolean isDone() { // We want to know if the task is done
@@ -43,5 +68,15 @@ public class Todo {
 
     public void setAssignee(Person assignee) { // We want to get someone to do the job
         this.assignee = assignee;
+    }
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "todoId=" + todoId +
+                ", description='" + description + '\'' +
+                ", done=" + done +
+                ", assignee=" + assignee +
+                '}';
     }
 }
