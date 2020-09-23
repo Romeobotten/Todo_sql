@@ -1,22 +1,24 @@
 package se.lexicon.romeobot.model;
 
+import java.util.Objects;
+
 public class Person {
     private int personId;
     private String firstName;
     private String lastName;
 
-    public Person() {
+    public Person() {  // Empty constructor is needed
     }
 
     public Person(int personId, String firstName, String lastName) { // Constructor
-        this.personId = personId; // PersonSequencer.nextPersonId();
+        this.personId = personId; // PersonSequencer.nextPersonId(); Not needed
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public int getPersonId() { // We need to read personId
         return this.personId;
-    }                          // We have no setPersonId because it is set only once and final
+    }                          // We have
     public void setPersonId(int personId) { // We can set the personId
         this.personId = personId;
     }
@@ -38,11 +40,26 @@ public class Person {
     }
 
     @Override
-    public String toString() {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return personId == person.personId &&
+                firstName.equals(person.firstName) &&
+                lastName.equals(person.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(personId, firstName, lastName);
+    }
+
+    @Override
+    public String toString() { // Looks better
         return "Person{" +
-                "personId=" + personId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "personId = " + personId +
+                ", firstName = '" + firstName + '\'' +
+                ", lastName = '" + lastName + '\'' +
                 '}';
     }
 }

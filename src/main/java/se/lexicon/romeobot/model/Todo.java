@@ -1,20 +1,21 @@
 package se.lexicon.romeobot.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Todo {
-    private int todoId;
+    private int todoId; // Not final
     private String title;
     private String description;
     private LocalDate deadline;
     private boolean done;
     private Person assignee;
 
-    public Todo() {
+    public Todo() { // Empty constructor is needed
     }
 
     public Todo(int todoId, String title, String description, LocalDate deadline, boolean done, Person assignee) { // Constructor
-        this.todoId = todoId; //TodoSequencer.nextTodoId();
+        this.todoId = todoId; //TodoSequencer.nextTodoId(); is no longer used
         this.title = title;
         this.description = description;
         this.deadline = deadline;
@@ -24,7 +25,7 @@ public class Todo {
 
     public int getTodoId() { // We need the ID number of the task
         return todoId;
-    }                        // We have no setTodoId because it is set only once and final
+    }
 
     public void setTodoId(int todoId) {
         this.todoId = todoId;
@@ -71,12 +72,32 @@ public class Todo {
     }
 
     @Override
-    public String toString() {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Todo todo = (Todo) o;
+        return todoId == todo.todoId &&
+                done == todo.done &&
+                title.equals(todo.title) &&
+                Objects.equals(description, todo.description) &&
+                deadline.equals(todo.deadline);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(todoId, title, description, deadline, done);
+    }
+
+    @Override
+    public String toString() { // Looks better when we print it
         return "Todo{" +
-                "todoId=" + todoId +
-                ", description='" + description + '\'' +
-                ", done=" + done +
-                ", assignee=" + assignee +
+                "todoId = " + todoId +
+                ", title = '" + title + '\'' +
+                ", description = '" + description + '\'' +
+                ",\n   deadline = " + deadline +
+                ", done = " + done +
+                ", assignee = " + assignee +
                 '}';
     }
+
 }
